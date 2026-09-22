@@ -1,17 +1,16 @@
-using Core.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Shared.Tasks;
 
 namespace API.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("api/[controller]")]
-public class TasksController(ITaskService taskService) : ControllerBase
+public class TasksController : ControllerBase
 {
     [HttpGet]
-    public async Task<IActionResult> GetPaged([FromQuery] TaskQuery query, CancellationToken cancellationToken)
+    public IActionResult GetPaged(CancellationToken cancellationToken)
     {
-        var tasks = await taskService.GetPagedAsync(query, cancellationToken);
-        return Ok(tasks);
+        return Ok();
     }
 }

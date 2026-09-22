@@ -1,6 +1,9 @@
+using API.Auth;
 using Core;
 using Core.Configurations;
 using Infrastructure.Configurations;
+using Infrastructure.Middleware;
+using Microsoft.AspNetCore.Authentication;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,13 +25,27 @@ builder.Services
     .AddCore()
     .AddInfrastructure(builder.Configuration);
 
+builder.Services
+    .AddAuthentication(JwtAuthenticationHandler.SchemeName)
+    .AddScheme<AuthenticationSchemeOptions, JwtAuthenticationHandler>(
+        JwtAuthenticationHandler.SchemeName,
+        options => { });
+builder.Services.AddAuthorization();
+
+builder.Services.AddExceptionHandler<ExceptionHandler>();
+builder.Services.AddProblemDetails();
+
 var app = builder.Build();
 
 app.UseSwagger();
 app.UseSwaggerUI();
 
+app.UseExceptionHandler();
+
 //app.UseHttpsRedirection();
 app.UseCors("ClientApp");
+app.UseAuthentication();
+app.UseAuthorization();
 app.MapControllers();
 
 app.Run();

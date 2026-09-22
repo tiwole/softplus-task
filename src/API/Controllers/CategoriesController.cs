@@ -1,16 +1,16 @@
-using Core.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("api/[controller]")]
-public class CategoriesController(ICategoryService categoryService) : ControllerBase
+public class CategoriesController : ControllerBase
 {
     [HttpGet]
-    public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
+    public IActionResult GetAll(CancellationToken cancellationToken)
     {
-        var categories = await categoryService.GetAllAsync(cancellationToken);
-        return Ok(categories);
+        return Ok();
     }
 }
