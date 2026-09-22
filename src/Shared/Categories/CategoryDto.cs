@@ -1,3 +1,8 @@
-﻿namespace Shared.Categories;
+namespace Shared.Categories;
 
-public sealed record CategoryDto(Guid Id, string Name);
+public class CategoryDto
+{
+    public Guid Id { get; set; }
+
+    public string Name { get; set; } = string.Empty;
+}

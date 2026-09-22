@@ -3,11 +3,17 @@ using Shared.Tasks;
 
 namespace Core.Services;
 
-public sealed class TaskService : ITaskService
+public class TaskService : ITaskService
 {
     public Task<PagedResult<TaskDto>> GetPagedAsync(TaskQuery query, CancellationToken cancellationToken)
     {
-        var result = new PagedResult<TaskDto>(Array.Empty<TaskDto>(), query.PageNumber, query.PageSize, 0);
+        var result = new PagedResult<TaskDto>
+        {
+            Items = new List<TaskDto>(),
+            PageNumber = query.PageNumber,
+            PageSize = query.PageSize,
+            TotalCount = 0
+        };
         return Task.FromResult(result);
     }
 }

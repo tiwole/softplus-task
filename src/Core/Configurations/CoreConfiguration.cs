@@ -1,10 +1,10 @@
-using Core.Interfaces;
+﻿using Core.Interfaces;
 using Core.Services;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Core;
+namespace Core.Configurations;
 
-public static class DependencyInjection
+public static class CoreConfiguration
 {
     public static IServiceCollection AddCore(this IServiceCollection services)
     {

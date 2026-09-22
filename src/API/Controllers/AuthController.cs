@@ -4,7 +4,7 @@ namespace API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public sealed class AuthController : ControllerBase
+public class AuthController : ControllerBase
 {
     [HttpPost("login")]
     public IActionResult Login()

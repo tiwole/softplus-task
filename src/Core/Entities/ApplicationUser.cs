@@ -1,6 +1,6 @@
 namespace Core.Entities;
 
-public sealed class ApplicationUser
+public class ApplicationUser
 {
     public Guid Id { get; set; }
 
@@ -8,5 +8,5 @@ public sealed class ApplicationUser
 
     public string PasswordHash { get; set; } = string.Empty;
 
-    public ICollection<TodoTask> Tasks { get; set; } = new List<TodoTask>();
+    public List<TodoTask> Tasks { get; set; } = [];
 }

@@ -5,7 +5,7 @@ namespace API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public sealed class CategoriesController(ICategoryService categoryService) : ControllerBase
+public class CategoriesController(ICategoryService categoryService) : ControllerBase
 {
     [HttpGet]
     public async Task<IActionResult> GetAll(CancellationToken cancellationToken)

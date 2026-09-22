@@ -1,7 +1,12 @@
 namespace Shared.Tasks;
 
-public sealed record TaskQuery(
-    int PageNumber = 1,
-    int PageSize = 10,
-    string? Search = null,
-    Guid? CategoryId = null);
+public class TaskQuery
+{
+    public int PageNumber { get; set; } = 1;
+
+    public int PageSize { get; set; } = 10;
+
+    public string? Search { get; set; }
+
+    public Guid? CategoryId { get; set; }
+}

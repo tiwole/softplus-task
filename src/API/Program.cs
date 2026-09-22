@@ -1,5 +1,6 @@
 using Core;
-using Infrastructure;
+using Core.Configurations;
+using Infrastructure.Configurations;
 
 var builder = WebApplication.CreateBuilder(args);
 
