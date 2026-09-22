@@ -1,4 +1,4 @@
-﻿namespace Infrastructure.Exceptions;
+namespace Core.Exceptions;
 
 public class AuthException : SoftPlusException
 {

@@ -1,4 +1,4 @@
-﻿using Infrastructure.Exceptions;
+using Core.Exceptions;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 

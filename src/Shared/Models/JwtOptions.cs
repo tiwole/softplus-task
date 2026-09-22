@@ -1,4 +1,4 @@
-namespace Infrastructure.Security;
+namespace Shared.Models;
 
 public class JwtOptions
 {

@@ -1,5 +1,5 @@
 using Core.Interfaces;
-using Infrastructure.Exceptions;
+using Core.Exceptions;
 using Microsoft.AspNetCore.Http;
 
 namespace Infrastructure;

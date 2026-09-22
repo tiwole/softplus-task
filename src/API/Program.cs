@@ -1,5 +1,4 @@
 using API.Auth;
-using Core;
 using Core.Configurations;
 using Infrastructure.Configurations;
 using Infrastructure.Middleware;

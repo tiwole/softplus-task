@@ -1,25 +1,24 @@
 using Core.Entities;
+using Core.Exceptions;
 using Core.Interfaces;
-using Infrastructure.Exceptions;
-using Infrastructure.Security;
 using Microsoft.AspNetCore.Identity;
 using Shared.Auth;
 
-namespace Infrastructure.Services;
+namespace Core.Services;
 
 public class AuthService(
     IUserRepository userRepository,
-    JwtTokenService jwtTokenService,
+    ITokenService tokenService,
     IPasswordHasher<ApplicationUser> passwordHasher) : IAuthService
 {
     public async Task<AuthResponse?> LoginAsync(LoginRequest request, CancellationToken cancellationToken)
     {
         var user = await userRepository.GetByEmailAsync(request.Email, cancellationToken);
 
-        if (user is null || passwordHasher.VerifyHashedPassword(user, user.PasswordHash, request.Password) == PasswordVerificationResult.Failed)
+        if (user is null || passwordHasher.VerifyHashedPassword(user, user.PasswordHash, request.Password) is PasswordVerificationResult.Failed )
             throw new AuthException("Invalid email or password");
 
-        var token = jwtTokenService.Create(user);
+        var token = tokenService.Create(user);
         return new AuthResponse
         {
             UserId = user.Id,
@@ -41,7 +40,7 @@ public class AuthService(
             request.Email,
             passwordHash,
             cancellationToken);
-        var token = jwtTokenService.Create(user);
+        var token = tokenService.Create(user);
 
         return new AuthResponse
         {
