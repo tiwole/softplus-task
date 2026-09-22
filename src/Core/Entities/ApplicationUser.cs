@@ -9,4 +9,6 @@ public class ApplicationUser
     public string PasswordHash { get; set; } = string.Empty;
 
     public List<TodoTask> Tasks { get; set; } = [];
+    public List<Category> Categories { get; set; } = [];
+    
 }

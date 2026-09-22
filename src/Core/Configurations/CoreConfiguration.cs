@@ -9,8 +9,7 @@ public static class CoreConfiguration
     public static IServiceCollection AddCore(this IServiceCollection services)
     {
         services.AddScoped<IAuthService, AuthService>();
-        //services.AddScoped<ITaskService, TaskService>();
-        //services.AddScoped<ICategoryService, CategoryService>();
+        services.AddScoped<ICategoryService, CategoryService>();
 
         return services;
     }

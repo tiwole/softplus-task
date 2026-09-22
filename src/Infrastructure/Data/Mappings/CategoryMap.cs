@@ -11,8 +11,17 @@ public class CategoryMap : IEntityTypeConfiguration<Category>
         builder.ToTable("Category");
 
         builder.HasKey(category => category.Id);
+        
+        builder.HasOne(category => category.User)
+            .WithMany(user => user.Categories)
+            .HasForeignKey(category => category.UserId)
+            .OnDelete(DeleteBehavior.Cascade);
 
-        builder.HasIndex(category => category.Name).IsUnique();
+        builder.HasIndex(category => new
+        {
+            category.UserId,
+            category.Name
+        }).IsUnique();
         
         builder.Property(category => category.Name)
             .HasMaxLength(128)

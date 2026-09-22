@@ -20,6 +20,7 @@ public static class InfrastructureConfiguration
         services.Configure<JwtOptions>(configuration.GetSection(JwtOptions.SectionName));
         services.AddHttpContextAccessor();
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<ICategoryRepository, CategoryRepository>();
         services.AddScoped<IUserRequestContext, UserRequestContext>();
         services.AddScoped<ITokenService, JwtTokenService>();
         services.AddScoped<JwtTokenService>();

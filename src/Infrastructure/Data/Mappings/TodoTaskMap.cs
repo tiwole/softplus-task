@@ -11,21 +11,27 @@ public class TodoTaskMap : IEntityTypeConfiguration<TodoTask>
         builder.ToTable("Task");
 
         builder.HasKey(task => task.Id);
-        
+
         builder.HasIndex(task => task.UserId);
 
-        builder.HasOne<ApplicationUser>()
+        builder.HasOne(task => task.User)
             .WithMany(user => user.Tasks)
             .HasForeignKey(task => task.UserId)
             .OnDelete(DeleteBehavior.Cascade);
 
-        builder.HasOne<Category>()
-            .WithMany()
+        builder.HasOne(task => task.Category)
+            .WithMany(category => category.Tasks)
             .HasForeignKey(task => task.CategoryId)
             .OnDelete(DeleteBehavior.SetNull);
-        
-        builder.Property(task => task.Title).HasMaxLength(256).IsRequired();
-        builder.Property(task => task.IsCompleted).HasDefaultValue(false);
-        builder.Property(task => task.CreatedAtUtc).HasDefaultValueSql("now()");
+
+        builder.Property(task => task.Title)
+            .HasMaxLength(256)
+            .IsRequired();
+
+        builder.Property(task => task.IsCompleted)
+            .HasDefaultValue(false);
+
+        builder.Property(task => task.CreatedAtUtc)
+            .HasDefaultValueSql("now()");
     }
 }

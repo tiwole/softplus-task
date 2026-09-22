@@ -50,7 +50,7 @@ public class JwtTokenService(IOptions<JwtOptions> options) : ITokenService
 
         try
         {
-            return new JwtSecurityTokenHandler().ValidateToken(
+            return new JwtSecurityTokenHandler { MapInboundClaims = false }.ValidateToken(
                 token,
                 validationParameters,
                 out _);
