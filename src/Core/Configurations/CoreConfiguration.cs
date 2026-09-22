@@ -10,6 +10,7 @@ public static class CoreConfiguration
     {
         services.AddScoped<IAuthService, AuthService>();
         services.AddScoped<ICategoryService, CategoryService>();
+        services.AddScoped<ITodoTaskService, TodoTaskService>();
 
         return services;
     }

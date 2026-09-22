@@ -21,6 +21,7 @@ public static class InfrastructureConfiguration
         services.AddHttpContextAccessor();
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<ICategoryRepository, CategoryRepository>();
+        services.AddScoped<ITodoTaskRepository, TodoTaskRepository>();
         services.AddScoped<IUserRequestContext, UserRequestContext>();
         services.AddScoped<ITokenService, JwtTokenService>();
         services.AddScoped<JwtTokenService>();
