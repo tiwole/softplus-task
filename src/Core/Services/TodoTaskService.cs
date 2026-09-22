@@ -11,7 +11,7 @@ public class TodoTaskService(
     ICategoryRepository categoryRepository,
     IUserRequestContext userContext) : ITodoTaskService
 {
-    public async Task<PaginatedResponse<TaskModel>> GetPagedAsync(PaginatedRequest request, CancellationToken cancellationToken)
+    public async Task<PaginatedResponse<TaskModel>> GetPagedAsync(GetTasksRequest request, CancellationToken cancellationToken)
     {
         var dataResult = await taskRepository.GetPagedAsync(request, userContext.UserId, cancellationToken);
         var data = dataResult.Data.Select(Map).ToArray();

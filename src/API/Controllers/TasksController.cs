@@ -1,7 +1,6 @@
 using Core.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Shared.Models;
 using Shared.Tasks;
 
 namespace API.Controllers;
@@ -12,7 +11,7 @@ namespace API.Controllers;
 public class TasksController(ITodoTaskService taskService) : ControllerBase
 {
     [HttpGet]
-    public async Task<IActionResult> GetPaged([FromQuery] PaginatedRequest request, CancellationToken cancellationToken)
+    public async Task<IActionResult> GetPaged([FromQuery] GetTasksRequest request, CancellationToken cancellationToken)
     {
         var tasks = await taskService.GetPagedAsync(request, cancellationToken);
         return Ok(tasks);

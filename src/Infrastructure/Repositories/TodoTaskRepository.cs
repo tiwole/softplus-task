@@ -3,18 +3,29 @@ using Core.Interfaces;
 using Core.Models;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
-using Shared.Models;
+using Shared.Tasks;
 
 namespace Infrastructure.Repositories;
 
 public class TodoTaskRepository(ApplicationDbContext dbContext) : ITodoTaskRepository
 {
-    public async Task<GetTodoTasksResult> GetPagedAsync(PaginatedRequest request, Guid userId, CancellationToken cancellationToken)
+    public async Task<GetTodoTasksResult> GetPagedAsync(GetTasksRequest request, Guid userId, CancellationToken cancellationToken)
     {
         var query = dbContext.Tasks
             .AsNoTracking()
             .Include(task => task.Category)
             .Where(task => task.UserId == userId);
+
+        if (!string.IsNullOrWhiteSpace(request.Search))
+        {
+            var search = request.Search.Trim().ToLower();
+            query = query.Where(task => task.Title.ToLower().Contains(search));
+        }
+
+        if (request.CategoryId is not null)
+        {
+            query = query.Where(task => task.CategoryId == request.CategoryId);
+        }
 
         var totalCount = await query.CountAsync(cancellationToken);
 

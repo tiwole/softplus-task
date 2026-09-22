@@ -1,12 +1,12 @@
 using Core.Entities;
 using Core.Models;
-using Shared.Models;
+using Shared.Tasks;
 
 namespace Core.Interfaces;
 
 public interface ITodoTaskRepository
 {
-    Task<GetTodoTasksResult> GetPagedAsync(PaginatedRequest request, Guid userId, CancellationToken cancellationToken);
+    Task<GetTodoTasksResult> GetPagedAsync(GetTasksRequest request, Guid userId, CancellationToken cancellationToken);
 
     Task<TodoTask?> GetByIdAsync(Guid id, CancellationToken cancellationToken);
 

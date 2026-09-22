@@ -5,7 +5,7 @@ namespace Core.Interfaces;
 
 public interface ITodoTaskService
 {
-    Task<PaginatedResponse<TaskModel>> GetPagedAsync(PaginatedRequest request, CancellationToken cancellationToken);
+    Task<PaginatedResponse<TaskModel>> GetPagedAsync(GetTasksRequest request, CancellationToken cancellationToken);
 
     Task<TaskModel> GetByIdAsync(Guid id, CancellationToken cancellationToken);
 
