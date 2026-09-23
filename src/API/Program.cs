@@ -1,14 +1,21 @@
 using API.Auth;
+using API.Filters;
+using API.Validators.Auth;
 using Core.Configurations;
+using FluentValidation;
 using Infrastructure.Configurations;
 using Infrastructure.Middleware;
 using Microsoft.AspNetCore.Authentication;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(options =>
+{
+    options.Filters.Add<ValidationFilter>();
+});
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddValidatorsFromAssemblyContaining<LoginRequestValidator>();
 
 builder.Services.AddCors(options =>
 {
