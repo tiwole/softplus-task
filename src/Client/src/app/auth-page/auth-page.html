@@ -1,0 +1,65 @@
+<section class="grid min-h-screen place-items-center px-4">
+  <div class="w-full max-w-md rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
+    <div class="mb-6">
+      <p class="text-sm font-semibold uppercase tracking-wide text-blue-700">TODO App</p>
+      <h1 class="mt-2 text-2xl font-semibold">Sign in to your workspace</h1>
+    </div>
+
+    <div class="mb-5 grid grid-cols-2 rounded-md bg-slate-100 p-1">
+      <button
+        type="button"
+        class="rounded px-3 py-2 text-sm font-medium"
+        [class.bg-white]="authMode === 'login'"
+        [class.shadow-sm]="authMode === 'login'"
+        (click)="authMode = 'login'"
+      >
+        Log in
+      </button>
+      <button
+        type="button"
+        class="rounded px-3 py-2 text-sm font-medium"
+        [class.bg-white]="authMode === 'register'"
+        [class.shadow-sm]="authMode === 'register'"
+        (click)="authMode = 'register'"
+      >
+        Register
+      </button>
+    </div>
+
+    <form class="space-y-4" (ngSubmit)="submitAuth()">
+      <label class="block">
+        <span class="text-sm font-medium text-slate-700">Email</span>
+        <input
+          type="email"
+          name="email"
+          required
+          [(ngModel)]="authForm.email"
+          class="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 outline-none focus:border-blue-600"
+        />
+      </label>
+
+      <label class="block">
+        <span class="text-sm font-medium text-slate-700">Password</span>
+        <input
+          type="password"
+          name="password"
+          required
+          [(ngModel)]="authForm.password"
+          class="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 outline-none focus:border-blue-600"
+        />
+      </label>
+
+      <button
+        type="submit"
+        class="w-full rounded-md bg-blue-700 px-4 py-2 font-medium text-white hover:bg-blue-800 disabled:opacity-60"
+        [disabled]="loading"
+      >
+        {{ authMode === 'login' ? 'Log in' : 'Create account' }}
+      </button>
+    </form>
+
+    @if (errorMessage) {
+      <p class="mt-4 rounded-md bg-red-50 px-3 py-2 text-sm text-red-700">{{ errorMessage }}</p>
+    }
+  </div>
+</section>
